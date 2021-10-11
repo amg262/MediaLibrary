@@ -30,3 +30,28 @@
 2021-10-10 21:12:29.8111|INFO|MediaLibrary.Program|movies.scrubbed.csv
 2021-10-10 21:12:29.8111|INFO|MediaLibrary.Program|movies2.scrubbed.csv
 2021-10-10 21:12:29.8111|INFO|MediaLibrary.Program|Program ended
+2021-10-10 21:17:44.2680|INFO|MediaLibrary.Program|Program started
+2021-10-10 21:17:45.9498|INFO|MediaLibrary.Program|Media type of: Movie
+2021-10-10 21:17:57.4172|ERROR|MediaLibrary.Program|System.FormatException: Input string was not in a correct format.
+   at System.Number.ThrowOverflowOrFormatException(ParsingStatus status, TypeCode type)
+   at System.Number.ParseInt32(ReadOnlySpan`1 value, NumberStyles styles, NumberFormatInfo info)
+   at System.Convert.ToInt32(String value)
+   at MediaLibrary.Program.Main(String[] args) in C:\Users\Andy\RiderProjects\MediaLibrary\Program.cs:line 42
+2021-10-10 21:18:02.6741|INFO|MediaLibrary.Program|Program started
+2021-10-10 21:18:04.2782|INFO|MediaLibrary.Program|Media type of: Movie
+2021-10-10 21:18:11.4340|ERROR|MediaLibrary.Program|System.IndexOutOfRangeException: Index was outside the bounds of the array.
+   at MediaLibrary.Program.Main(String[] args) in C:\Users\Andy\RiderProjects\MediaLibrary\Program.cs:line 42
+2021-10-10 21:18:17.6846|INFO|MediaLibrary.Program|Program started
+2021-10-10 21:18:19.0696|INFO|MediaLibrary.Program|Media type of: Movie
+2021-10-10 21:18:38.3628|INFO|MediaLibrary.MovieFileScrubber|File already scrubbed
+2021-10-10 21:18:38.3628|INFO|MediaLibrary.MovieFileScrubber|File already scrubbed
+2021-10-10 21:18:38.3628|INFO|MediaLibrary.Program|movies.scrubbed.csv
+2021-10-10 21:18:38.3628|INFO|MediaLibrary.Program|movies2.scrubbed.csv
+2021-10-10 21:18:38.3646|INFO|MediaLibrary.Program|Program ended
+2021-10-10 21:19:48.9373|INFO|MediaLibrary.Program|Program started
+2021-10-10 21:19:50.4379|INFO|MediaLibrary.Program|Media type of: Movie
+2021-10-10 21:20:02.4041|INFO|MediaLibrary.MovieFileScrubber|File already scrubbed
+2021-10-10 21:20:02.4041|INFO|MediaLibrary.MovieFileScrubber|File already scrubbed
+2021-10-10 21:20:02.4041|INFO|MediaLibrary.Program|movies.scrubbed.csv
+2021-10-10 21:20:02.4041|INFO|MediaLibrary.Program|movies2.scrubbed.csv
+2021-10-10 21:20:02.4041|INFO|MediaLibrary.Program|Program ended

@@ -48,7 +48,7 @@ namespace MediaLibrary
                     List<string> genresArr = new List<string>(genresRaw.Split(","));
                     
                     
-                    var movie = new Movie
+                    Movie movie = new Movie
                     {
                         mediaId = mediaId,
                         title = title,
@@ -57,6 +57,8 @@ namespace MediaLibrary
                         runningTime = timespanFormat,
                         genres = genresArr
                     };
+                    
+                    
                     
                     // var movie2 = new Movie
                     // {
@@ -129,7 +131,7 @@ namespace MediaLibrary
             //     // timespan (hours, minutes, seconds)
             //     runningTime = new TimeSpan(2, 21, 23),
             //     genres = {"Comedy", "Romance"}
-            // };
+            };
             //
             // Console.WriteLine(movie.Display());
             //
@@ -154,6 +156,7 @@ namespace MediaLibrary
             // };
             // Console.WriteLine(book.Display());
 
+            
             var scrubbedFile = MovieFileScrubber.ScrubMovies("movies.csv");
             var scrubbedMovieFile = MovieFileScrubber.ScrubMovies("movies2.csv");
          
