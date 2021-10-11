@@ -5,16 +5,16 @@ namespace MediaLibrary
 {
     public abstract class Media
     {
-        // public properties
-        public UInt64 mediaId { get; set; }
-        public string title { get; set; }
-        public List<string> genres { get; set; }
-
         // constructor
         public Media()
         {
             genres = new List<string>();
         }
+
+        // public properties
+        public ulong mediaId { get; set; }
+        public string title { get; set; }
+        public List<string> genres { get; set; }
 
         // public method
         public virtual string Display()
@@ -31,7 +31,8 @@ namespace MediaLibrary
 
         public override string Display()
         {
-            return $"Id: {mediaId}\nTitle: {title}\nDirector: {director}\nRun time: {runningTime}\nGenres: {string.Join(", ", genres)}\n";
+            return
+                $"Id: {mediaId}\nTitle: {title}\nDirector: {director}\nRun time: {runningTime}\nGenres: {string.Join(", ", genres)}\n";
         }
     }
 
@@ -43,7 +44,8 @@ namespace MediaLibrary
 
         public override string Display()
         {
-            return $"Id: {mediaId}\nTitle: {title}\nArtist: {artist}\nLabel: {recordLabel}\nGenres: {string.Join(", ", genres)}\n";
+            return
+                $"Id: {mediaId}\nTitle: {title}\nArtist: {artist}\nLabel: {recordLabel}\nGenres: {string.Join(", ", genres)}\n";
         }
     }
 
@@ -51,12 +53,13 @@ namespace MediaLibrary
     public class Book : Media
     {
         public string author { get; set; }
-        public UInt16 pageCount { get; set; }
+        public ushort pageCount { get; set; }
         public string publisher { get; set; }
 
         public override string Display()
         {
-            return $"Id: {mediaId}\nTitle: {title}\nAuthor: {author}\nPages: {pageCount}\nPublisher: {publisher}\nGenres: {string.Join(", ", genres)}\n";
+            return
+                $"Id: {mediaId}\nTitle: {title}\nAuthor: {author}\nPages: {pageCount}\nPublisher: {publisher}\nGenres: {string.Join(", ", genres)}\n";
         }
     }
 }

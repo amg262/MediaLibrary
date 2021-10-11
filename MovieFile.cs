@@ -1,17 +1,16 @@
-using NLog.Web;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using NLog;
+using NLog.Web;
 
 namespace MediaLibrary
 {
     public class MovieFile
     {
-        // public property
-        public string filePath { get; set; }
-        public List<Movie> Movies { get; set; }
-        private static NLog.Logger logger = NLogBuilder.ConfigureNLog(Directory.GetCurrentDirectory() + "\\nlog.config").GetCurrentClassLogger();
+        private static readonly Logger logger = NLogBuilder
+            .ConfigureNLog(Directory.GetCurrentDirectory() + "\\nlog.config").GetCurrentClassLogger();
 
         // constructor is a special method that is invoked
         // when an instance of a class is created
@@ -23,21 +22,21 @@ namespace MediaLibrary
             // to populate the list with data, read from the data file
             try
             {
-                StreamReader sr = new StreamReader(filePath);
+                var sr = new StreamReader(filePath);
                 while (!sr.EndOfStream)
                 {
                     // create instance of Movie class
-                    Movie movie = new Movie();
-                    string line = sr.ReadLine();
+                    var movie = new Movie();
+                    var line = sr.ReadLine();
                     // first look for quote(") in string
                     // this indicates a comma(,) in movie title
-                    int idx = line.IndexOf('"');
+                    var idx = line.IndexOf('"');
                     if (idx == -1)
                     {
                         // no quote = no comma in movie title
                         // movie details are separated with comma(,)
-                        string[] movieDetails = line.Split(',');
-                        movie.mediaId = UInt64.Parse(movieDetails[0]);
+                        var movieDetails = line.Split(',');
+                        movie.mediaId = ulong.Parse(movieDetails[0]);
                         movie.title = movieDetails[1];
                         movie.genres = movieDetails[2].Split('|').ToList();
                         movie.director = movieDetails[3];
@@ -47,7 +46,7 @@ namespace MediaLibrary
                     {
                         // quote = comma or quotes in movie title
                         // extract the movieId
-                        movie.mediaId = UInt64.Parse(line.Substring(0, idx - 1));
+                        movie.mediaId = ulong.Parse(line.Substring(0, idx - 1));
                         // remove movieId and first comma from string
                         line = line.Substring(idx);
                         // find the last quote
@@ -57,7 +56,7 @@ namespace MediaLibrary
                         // remove title and next comma from the string
                         line = line.Substring(idx + 2);
                         // split the remaining string based on commas
-                        string[] details = line.Split(',');
+                        var details = line.Split(',');
                         // the first item in the array should be genres 
                         movie.genres = details[0].Split('|').ToList();
                         // if there is another item in the array it should be director
@@ -65,8 +64,10 @@ namespace MediaLibrary
                         // if there is another item in the array it should be run time
                         movie.runningTime = TimeSpan.Parse(details[2]);
                     }
+
                     Movies.Add(movie);
                 }
+
                 // close file when done
                 sr.Close();
                 logger.Info("Movies in file {Count}", Movies.Count);
@@ -77,6 +78,10 @@ namespace MediaLibrary
             }
         }
 
+        // public property
+        public string filePath { get; set; }
+        public List<Movie> Movies { get; set; }
+
         // public method
         public bool isUniqueTitle(string title)
         {
@@ -85,6 +90,7 @@ namespace MediaLibrary
                 logger.Info("Duplicate movie title {Title}", title);
                 return false;
             }
+
             return true;
         }
 
@@ -95,10 +101,13 @@ namespace MediaLibrary
                 // first generate movie id
                 movie.mediaId = Movies.Max(m => m.mediaId) + 1;
                 // if title contains a comma, wrap it in quotes
-                string title = movie.title.IndexOf(',') != -1 || movie.title.IndexOf('"') != -1 ? $"\"{movie.title}\"" : movie.title;
-                StreamWriter sw = new StreamWriter(filePath, true);
+                var title = movie.title.IndexOf(',') != -1 || movie.title.IndexOf('"') != -1
+                    ? $"\"{movie.title}\""
+                    : movie.title;
+                var sw = new StreamWriter(filePath, true);
                 // write movie data to file
-                sw.WriteLine($"{movie.mediaId},{title},{string.Join("|", movie.genres)},{movie.director},{movie.runningTime}");
+                sw.WriteLine(
+                    $"{movie.mediaId},{title},{string.Join("|", movie.genres)},{movie.director},{movie.runningTime}");
                 sw.Close();
                 // add movie details to List
                 Movies.Add(movie);

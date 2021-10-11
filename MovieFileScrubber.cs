@@ -1,20 +1,23 @@
 using System;
 using System.IO;
-using NLog.Web;
 using System.Linq;
+using NLog;
+using NLog.Web;
 
 namespace MediaLibrary
 {
     public static class FileScrubber
     {
-        private static NLog.Logger logger = NLogBuilder.ConfigureNLog(Directory.GetCurrentDirectory() + "\\nlog.config").GetCurrentClassLogger();
+        private static readonly Logger logger = NLogBuilder
+            .ConfigureNLog(Directory.GetCurrentDirectory() + "\\nlog.config").GetCurrentClassLogger();
+
         public static string ScrubMovies(string readFile)
         {
             try
             {
                 // determine name of writeFile
-                string ext = readFile.Split('.').Last();
-                string writeFile = readFile.Replace(ext, $"scrubbed.{ext}");
+                var ext = readFile.Split('.').Last();
+                var writeFile = readFile.Replace(ext, $"scrubbed.{ext}");
                 // if writeFile exists, the file has already been scrubbed
                 if (File.Exists(writeFile))
                 {
@@ -26,36 +29,38 @@ namespace MediaLibrary
                     // file has not been scrubbed
                     logger.Info("File scrub started");
                     // open write file
-                    StreamWriter sw = new StreamWriter(writeFile);
+                    var sw = new StreamWriter(writeFile);
                     // open read file
-                    StreamReader sr = new StreamReader(readFile);
+                    var sr = new StreamReader(readFile);
                     // remove first line - column headers
                     sr.ReadLine();
                     while (!sr.EndOfStream)
                     {
                         // create instance of Movie class
-                        Movie movie = new Movie();
-                        string line = sr.ReadLine();
+                        var movie = new Movie();
+                        var line = sr.ReadLine();
                         // look for quote(") in string
                         // this indicates a comma(,) or quote(") in movie title
-                        int idx = line.IndexOf('"');
-                        string genres = "";
+                        var idx = line.IndexOf('"');
+                        var genres = "";
                         if (idx == -1)
                         {
                             // no quote = no comma or quote in movie title
                             // movie details are separated with comma(,)
-                            string[] movieDetails = line.Split(',');
-                            movie.mediaId = UInt64.Parse(movieDetails[0]);
+                            var movieDetails = line.Split(',');
+                            movie.mediaId = ulong.Parse(movieDetails[0]);
                             movie.title = movieDetails[1];
                             genres = movieDetails[2];
                             movie.director = movieDetails.Length > 3 ? movieDetails[3] : "unassigned";
-                            movie.runningTime = movieDetails.Length > 4 ? TimeSpan.Parse(movieDetails[4]) : new TimeSpan(0);
+                            movie.runningTime = movieDetails.Length > 4
+                                ? TimeSpan.Parse(movieDetails[4])
+                                : new TimeSpan(0);
                         }
                         else
                         {
                             // quote = comma or quotes in movie title
                             // extract the movieId
-                            movie.mediaId = UInt64.Parse(line.Substring(0, idx - 1));
+                            movie.mediaId = ulong.Parse(line.Substring(0, idx - 1));
                             // remove movieId and first comma from string
                             line = line.Substring(idx);
                             // find the last quote
@@ -65,7 +70,7 @@ namespace MediaLibrary
                             // remove title and next comma from the string
                             line = line.Substring(idx + 2);
                             // split the remaining string based on commas
-                            string[] details = line.Split(',');
+                            var details = line.Split(',');
                             // the first item in the array should be genres 
                             genres = details[0];
                             // if there is another item in the array it should be director
@@ -73,18 +78,22 @@ namespace MediaLibrary
                             // if there is another item in the array it should be run time
                             movie.runningTime = details.Length > 2 ? TimeSpan.Parse(details[2]) : new TimeSpan(0);
                         }
+
                         sw.WriteLine($"{movie.mediaId},{movie.title},{genres},{movie.director},{movie.runningTime}");
                     }
+
                     sw.Close();
                     sr.Close();
                     logger.Info("File scrub ended");
                 }
+
                 return writeFile;
             }
             catch (Exception ex)
             {
                 logger.Error(ex.Message);
             }
+
             return "";
         }
     }
