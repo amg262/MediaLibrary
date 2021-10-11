@@ -42,12 +42,12 @@ namespace MediaLibrary
                     var timespanFormat = new TimeSpan(Convert.ToInt32(timespanArr[0]),
                         Convert.ToInt32(timespanArr[1]),
                         Convert.ToInt32(timespanArr[2]));
-                    
+
                     Console.Write("Genres (Genre1,Genre2): ");
                     string genresRaw = Console.ReadLine();
                     List<string> genresArr = new List<string>(genresRaw.Split(","));
-                    
-                    
+
+
                     Movie movie = new Movie
                     {
                         mediaId = mediaId,
@@ -57,9 +57,8 @@ namespace MediaLibrary
                         runningTime = timespanFormat,
                         genres = genresArr
                     };
-                    
-                    
-                    
+
+
                     // var movie2 = new Movie
                     // {
                     //     mediaId = 123,
@@ -72,7 +71,6 @@ namespace MediaLibrary
                 }
                 else if (mediaType.ToUpper().Equals("A"))
                 {
-
                     logger.Info("Media type of: Album");
 
                     Console.Write("Media ID: ");
@@ -89,8 +87,6 @@ namespace MediaLibrary
 
                     Console.Write("Genres: ");
                     string genres = Console.ReadLine();
-                    
-                    
                 }
                 else if (mediaType.ToUpper().Equals("B"))
                 {
@@ -110,10 +106,9 @@ namespace MediaLibrary
 
                     Console.Write("Publisher: ");
                     string publisher = Console.ReadLine();
-                    
+
                     Console.Write("Genres: ");
                     string genres = Console.ReadLine();
-                    
                 }
             }
             catch (Exception e)
@@ -131,40 +126,41 @@ namespace MediaLibrary
             //     // timespan (hours, minutes, seconds)
             //     runningTime = new TimeSpan(2, 21, 23),
             //     genres = {"Comedy", "Romance"}
-            };
-            //
-            // Console.WriteLine(movie.Display());
-            //
-            // var album = new Album
-            // {
-            //     mediaId = 321,
-            //     title = "Greatest Album Ever, The (2020)",
-            //     artist = "Jeff's Awesome Band",
-            //     recordLabel = "Universal Music Group",
-            //     genres = {"Rock"}
-            // };
-            // Console.WriteLine(album.Display());
-            //
-            // var book = new Book
-            // {
-            //     mediaId = 111,
-            //     title = "Super Cool Book",
-            //     author = "Jeff Grissom",
-            //     pageCount = 101,
-            //     publisher = "",
-            //     genres = {"Suspense", "Mystery"}
-            // };
-            // Console.WriteLine(book.Display());
+        // };
+        //
+        // Console.WriteLine(movie.Display());
+        //
+        // var album = new Album
+        // {
+        //     mediaId = 321,
+        //     title = "Greatest Album Ever, The (2020)",
+        //     artist = "Jeff's Awesome Band",
+        //     recordLabel = "Universal Music Group",
+        //     genres = {"Rock"}
+        // };
+        // Console.WriteLine(album.Display());
+        //
+        // var book = new Book
+        // {
+        //     mediaId = 111,
+        //     title = "Super Cool Book",
+        //     author = "Jeff Grissom",
+        //     pageCount = 101,
+        //     publisher = "",
+        //     genres = {"Suspense", "Mystery"}
+        // };
+        // Console.WriteLine(book.Display());
 
-            
-            var scrubbedFile = MovieFileScrubber.ScrubMovies("movies.csv");
-            var scrubbedMovieFile = MovieFileScrubber.ScrubMovies("movies2.csv");
-         
-            
-            logger.Info(scrubbedFile);
-            logger.Info(scrubbedMovieFile);
 
-            logger.Info("Program ended");
-        }
+        var scrubbedFile = MovieFileScrubber.ScrubMovies("movies.csv");
+        var scrubbedMovieFile = MovieFileScrubber.ScrubMovies("movies2.csv");
+
+
+        logger.Info(scrubbedFile);
+        logger.Info(scrubbedMovieFile);
+
+        logger.Info("Program ended");
     }
+}
+
 }
