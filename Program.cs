@@ -15,6 +15,50 @@ namespace MediaLibrary
         {
             logger.Info("Program started");
 
+
+            Console.WriteLine("(M)ovie  |  (A)lbum  |  (B)ook");
+            string mediaType = Console.ReadLine();
+
+            try
+            {
+                if (mediaType.ToUpper().Equals("M"))
+                {
+                    Console.WriteLine("We got 1");
+
+                    Console.Write("Media ID: ");
+                    ulong.TryParse(Console.ReadLine(), out ulong mediaId);
+
+                    Console.Write("Title: ");
+                    string title = Console.ReadLine();
+
+                    Console.Write("Director: ");
+                    string director = Console.ReadLine();
+
+                    Console.Write("Timespan (hr:min:sec) : ");
+                    string timespanRaw = Console.ReadLine();
+
+                    string[] timespanArr = timespanRaw.Split(":");
+                    var timespanFormat = new TimeSpan(Convert.ToInt32(timespanArr[0]),
+                        Convert.ToInt32(timespanArr[1]),
+                        Convert.ToInt32(timespanArr[2]));
+                    
+                    Console.Write("Genres: ");
+                    string genres = Console.ReadLine();
+                }
+                else if (mediaType.ToUpper().Equals("M"))
+                {
+                }
+                else if (mediaType.ToUpper().Equals("M"))
+                {
+                }
+            }
+            catch (Exception e)
+            {
+                logger.Error(e);
+                Console.WriteLine(e);
+                throw;
+            }
+
             var movie = new Movie
             {
                 mediaId = 123,
