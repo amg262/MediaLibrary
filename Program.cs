@@ -23,7 +23,7 @@ namespace MediaLibrary
             {
                 if (mediaType.ToUpper().Equals("M"))
                 {
-                    Console.WriteLine("We got 1");
+                    logger.Info("Media type of: Movie");
 
                     Console.Write("Media ID: ");
                     ulong.TryParse(Console.ReadLine(), out ulong mediaId);
@@ -45,11 +45,50 @@ namespace MediaLibrary
                     Console.Write("Genres: ");
                     string genres = Console.ReadLine();
                 }
-                else if (mediaType.ToUpper().Equals("M"))
+                else if (mediaType.ToUpper().Equals("A"))
                 {
+
+                    logger.Info("Media type of: Album");
+
+                    Console.Write("Media ID: ");
+                    ulong.TryParse(Console.ReadLine(), out ulong mediaId);
+
+                    Console.Write("Title: ");
+                    string title = Console.ReadLine();
+
+                    Console.Write("Artist: ");
+                    string artist = Console.ReadLine();
+
+                    Console.Write("Label: ");
+                    string label = Console.ReadLine();
+
+                    Console.Write("Genres: ");
+                    string genres = Console.ReadLine();
+                    
+                    
                 }
-                else if (mediaType.ToUpper().Equals("M"))
+                else if (mediaType.ToUpper().Equals("B"))
                 {
+                    logger.Info("Media type of: Book");
+
+                    Console.Write("Media ID: ");
+                    ulong.TryParse(Console.ReadLine(), out ulong mediaId);
+
+                    Console.Write("Title: ");
+                    string title = Console.ReadLine();
+
+                    Console.Write("Author: ");
+                    string author = Console.ReadLine();
+
+                    Console.Write("Pages: ");
+                    UInt32.TryParse(Console.ReadLine(), out UInt32 pages);
+
+                    Console.Write("Publisher: ");
+                    string publisher = Console.ReadLine();
+                    
+                    Console.Write("Genres: ");
+                    string genres = Console.ReadLine();
+                    
                 }
             }
             catch (Exception e)
