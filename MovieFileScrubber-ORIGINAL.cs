@@ -6,7 +6,7 @@ using NLog.Web;
 
 namespace MediaLibrary
 {
-    public static class MovieFileScrubber
+    public static class FileScrubber
     {
         private static readonly Logger logger = NLogBuilder
             .ConfigureNLog(Directory.GetCurrentDirectory() + "\\nlog.config").GetCurrentClassLogger();

@@ -23,3 +23,10 @@
 2021-10-10 21:10:20.7762|INFO|MediaLibrary.Program|movies.scrubbed.csv
 2021-10-10 21:10:20.7762|INFO|MediaLibrary.Program|
 2021-10-10 21:10:20.7762|INFO|MediaLibrary.Program|Program ended
+2021-10-10 21:12:08.5996|INFO|MediaLibrary.Program|Program started
+2021-10-10 21:12:10.7417|INFO|MediaLibrary.Program|Media type of: Movie
+2021-10-10 21:12:29.8111|INFO|MediaLibrary.MovieFileScrubber|File already scrubbed
+2021-10-10 21:12:29.8111|INFO|MediaLibrary.MovieFileScrubber|File already scrubbed
+2021-10-10 21:12:29.8111|INFO|MediaLibrary.Program|movies.scrubbed.csv
+2021-10-10 21:12:29.8111|INFO|MediaLibrary.Program|movies2.scrubbed.csv
+2021-10-10 21:12:29.8111|INFO|MediaLibrary.Program|Program ended

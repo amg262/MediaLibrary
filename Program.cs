@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using NLog;
 using NLog.Web;
@@ -42,8 +43,30 @@ namespace MediaLibrary
                         Convert.ToInt32(timespanArr[1]),
                         Convert.ToInt32(timespanArr[2]));
                     
-                    Console.Write("Genres: ");
-                    string genres = Console.ReadLine();
+                    Console.Write("Genres (Genre1,Genre2): ");
+                    string genresRaw = Console.ReadLine();
+                    List<string> genresArr = new List<string>(genresRaw.Split(","));
+                    
+                    
+                    var movie = new Movie
+                    {
+                        mediaId = mediaId,
+                        title = title,
+                        director = director,
+                        // timespan (hours, minutes, seconds)
+                        runningTime = timespanFormat,
+                        genres = genresArr
+                    };
+                    
+                    // var movie2 = new Movie
+                    // {
+                    //     mediaId = 123,
+                    //     title = "Greatest Movie Ever, The (2020)",
+                    //     director = "Jeff Grissom",
+                    //     // timespan (hours, minutes, seconds)
+                    //     runningTime = new TimeSpan(2, 21, 23),
+                    //     genres = {"Comedy", "Romance"}
+                    // };
                 }
                 else if (mediaType.ToUpper().Equals("A"))
                 {
@@ -81,7 +104,7 @@ namespace MediaLibrary
                     string author = Console.ReadLine();
 
                     Console.Write("Pages: ");
-                    UInt32.TryParse(Console.ReadLine(), out UInt32 pages);
+                    ushort.TryParse(Console.ReadLine(), out ushort pages);
 
                     Console.Write("Publisher: ");
                     string publisher = Console.ReadLine();
@@ -98,41 +121,45 @@ namespace MediaLibrary
                 throw;
             }
 
-            var movie = new Movie
-            {
-                mediaId = 123,
-                title = "Greatest Movie Ever, The (2020)",
-                director = "Jeff Grissom",
-                // timespan (hours, minutes, seconds)
-                runningTime = new TimeSpan(2, 21, 23),
-                genres = {"Comedy", "Romance"}
-            };
+            // var movie = new Movie
+            // {
+            //     mediaId = 123,
+            //     title = "Greatest Movie Ever, The (2020)",
+            //     director = "Jeff Grissom",
+            //     // timespan (hours, minutes, seconds)
+            //     runningTime = new TimeSpan(2, 21, 23),
+            //     genres = {"Comedy", "Romance"}
+            // };
+            //
+            // Console.WriteLine(movie.Display());
+            //
+            // var album = new Album
+            // {
+            //     mediaId = 321,
+            //     title = "Greatest Album Ever, The (2020)",
+            //     artist = "Jeff's Awesome Band",
+            //     recordLabel = "Universal Music Group",
+            //     genres = {"Rock"}
+            // };
+            // Console.WriteLine(album.Display());
+            //
+            // var book = new Book
+            // {
+            //     mediaId = 111,
+            //     title = "Super Cool Book",
+            //     author = "Jeff Grissom",
+            //     pageCount = 101,
+            //     publisher = "",
+            //     genres = {"Suspense", "Mystery"}
+            // };
+            // Console.WriteLine(book.Display());
 
-            Console.WriteLine(movie.Display());
-
-            var album = new Album
-            {
-                mediaId = 321,
-                title = "Greatest Album Ever, The (2020)",
-                artist = "Jeff's Awesome Band",
-                recordLabel = "Universal Music Group",
-                genres = {"Rock"}
-            };
-            Console.WriteLine(album.Display());
-
-            var book = new Book
-            {
-                mediaId = 111,
-                title = "Super Cool Book",
-                author = "Jeff Grissom",
-                pageCount = 101,
-                publisher = "",
-                genres = {"Suspense", "Mystery"}
-            };
-            Console.WriteLine(book.Display());
-
-            var scrubbedFile = FileScrubber.ScrubMovies("movies.csv");
+            var scrubbedFile = MovieFileScrubber.ScrubMovies("movies.csv");
+            var scrubbedMovieFile = MovieFileScrubber.ScrubMovies("movies2.csv");
+         
+            
             logger.Info(scrubbedFile);
+            logger.Info(scrubbedMovieFile);
 
             logger.Info("Program ended");
         }
