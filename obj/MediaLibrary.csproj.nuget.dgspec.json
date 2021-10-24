@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Andy\\RiderProjects\\MediaLibrary\\MediaLibrary.csproj": {}
+    "/home/andy/RiderProjects/MediaLibrary/MediaLibrary.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Andy\\RiderProjects\\MediaLibrary\\MediaLibrary.csproj": {
+    "/home/andy/RiderProjects/MediaLibrary/MediaLibrary.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Andy\\RiderProjects\\MediaLibrary\\MediaLibrary.csproj",
+        "projectUniqueName": "/home/andy/RiderProjects/MediaLibrary/MediaLibrary.csproj",
         "projectName": "MediaLibrary",
-        "projectPath": "C:\\Users\\Andy\\RiderProjects\\MediaLibrary\\MediaLibrary.csproj",
-        "packagesPath": "C:\\Users\\Andy\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Andy\\RiderProjects\\MediaLibrary\\obj\\",
+        "projectPath": "/home/andy/RiderProjects/MediaLibrary/MediaLibrary.csproj",
+        "packagesPath": "/home/andy/.nuget/packages/",
+        "outputPath": "/home/andy/RiderProjects/MediaLibrary/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Andy\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "/home/andy/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -24,7 +24,6 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
-            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -36,11 +35,30 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "targetAlias": "netcoreapp3.1",
           "dependencies": {
+            "NLog": {
+              "target": "Package",
+              "version": "[5.0.0-preview.2, )"
+            },
+            "NLog.Config": {
+              "target": "Package",
+              "version": "[4.7.11, )"
+            },
+            "NLog.Extensions.Logging": {
+              "target": "Package",
+              "version": "[5.0.0-preview.2, )"
+            },
+            "NLog.Web": {
+              "target": "Package",
+              "version": "[4.14.0, )"
+            },
             "NLog.Web.AspNetCore": {
               "target": "Package",
               "version": "[4.9.3, )"
+            },
+            "System.Linq": {
+              "target": "Package",
+              "version": "[4.3.0, )"
             }
           },
           "imports": [
@@ -53,12 +71,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.NETCore.App.Host.win-x64",
-              "version": "[3.1.18, 3.1.18]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -67,7 +79,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.414/RuntimeIdentifierGraph.json"
         }
       }
     }
