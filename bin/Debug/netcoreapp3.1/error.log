@@ -55,3 +55,20 @@
 2021-10-10 21:20:02.4041|INFO|MediaLibrary.Program|movies.scrubbed.csv
 2021-10-10 21:20:02.4041|INFO|MediaLibrary.Program|movies2.scrubbed.csv
 2021-10-10 21:20:02.4041|INFO|MediaLibrary.Program|Program ended
+2021-11-12 16:42:10.1510|INFO|MediaLibrary.Program|Program started
+2021-11-12 16:42:13.7378|INFO|MediaLibrary.Program|Media type of: Album
+2021-11-12 16:42:28.6860|INFO|MediaLibrary.MovieFileScrubber|File scrub started
+2021-11-12 16:42:28.7013|INFO|MediaLibrary.MovieFileScrubber|File scrub ended
+2021-11-12 16:42:28.7013|INFO|MediaLibrary.BookFileScrubber|File scrub started
+2021-11-12 16:42:28.7013|ERROR|MediaLibrary.BookFileScrubber|Could not find file 'C:\Users\Andy\RiderProjects\MediaLibrary\books.csv'.
+2021-11-12 16:42:28.7126|INFO|MediaLibrary.AlbumFileScrubber|File scrub started
+2021-11-12 16:42:28.7126|ERROR|MediaLibrary.AlbumFileScrubber|Could not find file 'C:\Users\Andy\RiderProjects\MediaLibrary\albums.csv'.
+2021-11-12 16:42:28.7126|INFO|MediaLibrary.Program|movies.scrubbed.csv
+2021-11-12 16:42:28.7126|INFO|MediaLibrary.Program|Program ended
+2021-11-12 16:43:08.4435|INFO|MediaLibrary.Program|Program started
+2021-11-12 16:43:09.5619|INFO|MediaLibrary.Program|Media type of: Movie
+2021-11-12 16:43:22.1186|INFO|MediaLibrary.MovieFileScrubber|File already scrubbed
+2021-11-12 16:43:22.1186|INFO|MediaLibrary.BookFileScrubber|File already scrubbed
+2021-11-12 16:43:22.1186|INFO|MediaLibrary.AlbumFileScrubber|File already scrubbed
+2021-11-12 16:43:22.1186|INFO|MediaLibrary.Program|movies.scrubbed.csv
+2021-11-12 16:43:22.1186|INFO|MediaLibrary.Program|Program ended

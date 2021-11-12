@@ -17,98 +17,116 @@ namespace MediaLibrary
             logger.Info("Program started");
 
 
-            Console.WriteLine("(M)ovie  |  (A)lbum  |  (B)ook");
-            string mediaType = Console.ReadLine();
+            Console.WriteLine("(M)ovie  |  (A)lbum  |  (B)ook  |  (S)earch");
+            var mediaType = Console.ReadLine();
 
             try
             {
-                if (mediaType.ToUpper().Equals("M"))
+                if (mediaType != null && mediaType.ToUpper().Equals("M"))
                 {
                     logger.Info("Media type of: Movie");
 
                     Console.Write("Media ID: ");
-                    ulong.TryParse(Console.ReadLine(), out ulong mediaId);
+                    ulong.TryParse(Console.ReadLine(), out var mediaId);
 
                     Console.Write("Title: ");
-                    string title = Console.ReadLine();
+                    var title = Console.ReadLine();
 
                     Console.Write("Director: ");
-                    string director = Console.ReadLine();
+                    var director = Console.ReadLine();
 
                     Console.Write("Timespan (hr:min:sec) : ");
-                    string timespanRaw = Console.ReadLine();
+                    var timespanRaw = Console.ReadLine();
 
-                    string[] timespanArr = timespanRaw.Split(":");
+                    var timespanArr = timespanRaw.Split(":");
                     var timespanFormat = new TimeSpan(Convert.ToInt32(timespanArr[0]),
                         Convert.ToInt32(timespanArr[1]),
                         Convert.ToInt32(timespanArr[2]));
 
                     Console.Write("Genres (Genre1,Genre2): ");
-                    string genresRaw = Console.ReadLine();
-                    List<string> genresArr = new List<string>(genresRaw.Split(","));
+                    var genresRaw = Console.ReadLine();
+                    var genresArr = new List<string>(genresRaw.Split(","));
 
 
-                    Movie movie = new Movie
+                    var movie = new Movie
                     {
                         mediaId = mediaId,
                         title = title,
                         director = director,
-                        // timespan (hours, minutes, seconds)
                         runningTime = timespanFormat,
                         genres = genresArr
                     };
-
-
-                    // var movie2 = new Movie
-                    // {
-                    //     mediaId = 123,
-                    //     title = "Greatest Movie Ever, The (2020)",
-                    //     director = "Jeff Grissom",
-                    //     // timespan (hours, minutes, seconds)
-                    //     runningTime = new TimeSpan(2, 21, 23),
-                    //     genres = {"Comedy", "Romance"}
-                    // };
                 }
-                else if (mediaType.ToUpper().Equals("A"))
+                else if (mediaType != null && mediaType.ToUpper().Equals("A"))
                 {
                     logger.Info("Media type of: Album");
 
                     Console.Write("Media ID: ");
-                    ulong.TryParse(Console.ReadLine(), out ulong mediaId);
+                    ulong.TryParse(Console.ReadLine(), out var mediaId);
 
                     Console.Write("Title: ");
-                    string title = Console.ReadLine();
+                    var title = Console.ReadLine();
 
                     Console.Write("Artist: ");
-                    string artist = Console.ReadLine();
+                    var artist = Console.ReadLine();
 
                     Console.Write("Label: ");
-                    string label = Console.ReadLine();
+                    var label = Console.ReadLine();
 
                     Console.Write("Genres: ");
-                    string genres = Console.ReadLine();
+                    var genres = new List<string> {Console.ReadLine()};
+
+                    var album = new Album
+                    {
+                        mediaId = mediaId,
+                        title = title,
+                        artist = artist,
+                        recordLabel = label,
+                        genres = genres
+                    };
                 }
-                else if (mediaType.ToUpper().Equals("B"))
+                else if (mediaType != null && mediaType.ToUpper().Equals("B"))
                 {
                     logger.Info("Media type of: Book");
 
                     Console.Write("Media ID: ");
-                    ulong.TryParse(Console.ReadLine(), out ulong mediaId);
+                    ulong.TryParse(Console.ReadLine(), out var mediaId);
 
                     Console.Write("Title: ");
-                    string title = Console.ReadLine();
+                    var title = Console.ReadLine();
 
                     Console.Write("Author: ");
-                    string author = Console.ReadLine();
+                    var author = Console.ReadLine();
 
                     Console.Write("Pages: ");
-                    ushort.TryParse(Console.ReadLine(), out ushort pages);
+                    ushort.TryParse(Console.ReadLine(), out var pages);
 
                     Console.Write("Publisher: ");
-                    string publisher = Console.ReadLine();
+                    var publisher = Console.ReadLine();
 
                     Console.Write("Genres: ");
-                    string genres = Console.ReadLine();
+                    var genres = new List<string> {Console.ReadLine()};
+
+                    var book = new Book
+                    {
+                        mediaId = mediaId,
+                        title = title,
+                        author = author,
+                        pageCount = pages,
+                        publisher = publisher,
+                        genres = genres
+                    };
+                    Console.WriteLine(book.Display());
+                }
+                else if (mediaType.ToUpper().Equals("S"))
+                {
+                    Console.WriteLine("Search by Keyword: ");
+                    var keyword = Console.ReadLine();
+                    var m = new Movie();
+
+                    var file = new MovieFile("movies.scrubbed.csv");
+
+                    file.Search(keyword);
                 }
             }
             catch (Exception e)
@@ -118,49 +136,14 @@ namespace MediaLibrary
                 throw;
             }
 
-            // var movie = new Movie
-            // {
-            //     mediaId = 123,
-            //     title = "Greatest Movie Ever, The (2020)",
-            //     director = "Jeff Grissom",
-            //     // timespan (hours, minutes, seconds)
-            //     runningTime = new TimeSpan(2, 21, 23),
-            //     genres = {"Comedy", "Romance"}
-        // };
-        //
-        // Console.WriteLine(movie.Display());
-        //
-        // var album = new Album
-        // {
-        //     mediaId = 321,
-        //     title = "Greatest Album Ever, The (2020)",
-        //     artist = "Jeff's Awesome Band",
-        //     recordLabel = "Universal Music Group",
-        //     genres = {"Rock"}
-        // };
-        // Console.WriteLine(album.Display());
-        //
-        // var book = new Book
-        // {
-        //     mediaId = 111,
-        //     title = "Super Cool Book",
-        //     author = "Jeff Grissom",
-        //     pageCount = 101,
-        //     publisher = "",
-        //     genres = {"Suspense", "Mystery"}
-        // };
-        // Console.WriteLine(book.Display());
+            var scrubbedMovieFile = MovieFileScrubber.ScrubMovies("movies.csv");
+            var scrubbedBookFile = BookFileScrubber.ScrubMovies("books.csv");
+            var scrubbedAlbumFile = AlbumFileScrubber.ScrubMovies("albums.csv");
 
 
-        var scrubbedFile = MovieFileScrubber.ScrubMovies("movies.csv");
-        var scrubbedMovieFile = MovieFileScrubber.ScrubMovies("movies2.csv");
+            logger.Info(scrubbedMovieFile);
 
-
-        logger.Info(scrubbedFile);
-        logger.Info(scrubbedMovieFile);
-
-        logger.Info("Program ended");
+            logger.Info("Program ended");
+        }
     }
-}
-
 }
